@@ -13,7 +13,7 @@ namespace zSolutions.Data
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Job> Jobs { get; }
+        public DbSet<Job> Jobs { get; set; }
         public DbSet<Contact> Contact { get; set; }
     }
 }

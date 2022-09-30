@@ -54,7 +54,7 @@ namespace zSolutions.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,DateCreated,GitHub")] Job job)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,GitHub,Created,Status")] Job job)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace zSolutions.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,DateCreated,GitHub")] Job job)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,GitHub,Created,Status")] Job job)
         {
             if (id != job.Id)
             {

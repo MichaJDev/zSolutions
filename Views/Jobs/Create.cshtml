@@ -1,15 +1,13 @@
-﻿@model zSolutions.Models.Jobs.Job
+﻿@using System.Net
+@model zSolutions.Models.Jobs.Job
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>Job</h4>
-<hr />
-<div class="row">
+<div class="seperator-sm-top"></div>
+<div class="row align-content-center">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -20,27 +18,76 @@
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                @Html.TextAreaFor(model => model.Description, new {@Class="form-control seperator-xxl-fat-mid seperator-xxl-top"})
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DateCreated" class="control-label"></label>
-                <input asp-for="DateCreated" class="form-control" />
-                <span asp-validation-for="DateCreated" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="GitHub" class="control-label"></label>
-                <input asp-for="GitHub" class="form-control" />
+                <div class="row">
+                    <div class="col"><input asp-for="GitHub" id="github" class="form-control" /></div>
+                    <div class="col pressed">
+                        <div class="row">
+                            <div class="col">
+                                <span id="right" class="checkbox ">
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+                                <span id="notright" class="cross">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
                 <span asp-validation-for="GitHub" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="Created" class="control-label"></label>
+                <input asp-for="Created" class="form-control" />
+                <span asp-validation-for="Created" class="text-danger">
+
+                </span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label "></label>
+                <select asp-for="Status" class="form-control">
+                    <option value="0">New</option>
+                    <option value="1">Progress</option>
+                    <option value="2">Finished</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
-<div>
+<div class="seperator-sm-top"></div>
+@*<div>
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@
+<script type="text/javascript">
 
+    let input = document.querySelector('#github');
+
+    // Add an event listener to monitor changes
+    input.addEventListener('keyup', function (e) {
+        if (/^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test($("#github").val())) {
+            notright.style.visibility = 'hidden';
+            right.style.visibility = 'visible';
+        } else {
+            notright.style.visibility = 'visible';
+            right.style.visibility = 'hidden'
+        }
+    });
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

@@ -6,55 +6,29 @@
 }
 
 <h1>Index</h1>
-<div class="seperator-top"></div>
-<p>
+<div class="seperator-sm-top"></div>
+@*<p>
     <a class="btn btn-outline-dark btn-social mx-1" asp-controller="Contacts" asp-action="Create"><i class="fa-sharp fa-solid fa-square-plus"></i> </a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Send)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Message)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Send)
-            </td>
-            <td>
+</p>*@
+
+@foreach (var item in Model)
+{
+    <div class="card">
+        <h5 class="card-header"> @Html.DisplayFor(modelItem => item.Id) | @Html.DisplayFor(modelItem => item.Name)</h5>
+        <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Email) | @Html.DisplayFor(modelItem => item.Phone)</h5>
+            <p class="card-text">
                 @Html.DisplayFor(modelItem => item.Message)
-            </td>
-            <td>
+                <br />
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+            </p>
+        </div>
+        <div class="card-footer">@Html.DisplayFor(modelItem => item.Send)</div>
+    </div>
+    <div class="seperator-sm-bot"></div>
+
 }
-    </tbody>
-</table>
+
+<!--<div class="seperator-top"></div>-->
