@@ -76,14 +76,24 @@
 
     // Add an event listener to monitor changes
     input.addEventListener('keyup', function (e) {
-        if (/^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test($("#github").val())) {
-            notright.style.visibility = 'hidden';
-            right.style.visibility = 'visible';
-        } else {
+
+        var a = fetch(input.value)
+        a.then(response => {
+            if (!response.ok) {
+                notright.style.visibility = 'visible';
+                right.style.visibility = 'hidden';
+                throw Error(response.statusText);
+            } else {
+                console.log(input.value);
+                notright.style.visibility = 'hidden';
+                right.style.visibility = 'visible';
+            }
+        }).catch(error => {                  // 3
             notright.style.visibility = 'visible';
-            right.style.visibility = 'hidden'
-        }
+            right.style.visibility = 'hidden';
+        });
     });
+
 </script>
 
 @section Scripts {

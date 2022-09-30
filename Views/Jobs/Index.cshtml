@@ -6,6 +6,7 @@
 }
 
 <h1>Index</h1>
+<div class="seperator-sm-top"></div>
 <script>
     function showAndHideJob() {
         var x = document.getElementById("hiddenDesc");
@@ -22,7 +23,7 @@
 
 @foreach (var item in Model)
 {
-    <div class="card" onclick="showAndHideJob()">
+    <div class="card">
         <div class="container">
             <div class="row">
                 <div class="col-1">@Html.DisplayFor(modelItem => item.Id)</div>
@@ -46,8 +47,7 @@
                 </div>
             </div>
         </div>
-
-
     </div>
+    <br />
 }
-
+<div class="seperator-sm-top"></div>

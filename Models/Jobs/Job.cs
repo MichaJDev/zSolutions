@@ -16,7 +16,7 @@ namespace zSolutions.Models.Jobs
         [Required(ErrorMessage = "Description is required!")]
         public string? Description { get; set; }
         [Required(ErrorMessage = "GitHub link is required!")]
-        [Url]
+        [Url(ErrorMessage = "Not a valid url!")]
         public string? GitHub { get; set; }
         [Required]
         public DateTime Created { get; set; }
