@@ -23,9 +23,9 @@ namespace zSolutions.Models.Jobs
         [Required]
         [Display(Name = "Status")]
         public JobStatusType Status { get; set; }
-        [NotMapped]
-        public List<User>? Attendees { get; set; }
-        [NotMapped]
+        public int ClientId { get; set; }
         public User? Client { get; set; }
+       
+        
     }
 }

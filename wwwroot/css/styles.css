@@ -12215,18 +12215,24 @@ body {
 
 
 #right {
-    margin: -12px 0 0 -20px;
-    padding: 1%;
-    visibility: hidden;
-    float: left;
-    width: 20px;
-    position: fixed;
-}
-
-#notright {
     margin-top: 5px;
     padding: 1%;
     visibility: hidden;
     float: left;
     width: 20px;
+}
+
+#notright {
+    margin: 7px 0 0 -15px ;
+    padding: 1%;
+    visibility: hidden;
+    float: left;
+    width: 20px;
+}
+.card-style {
+    padding: 1.9% 3% 2.2% 2%;
+}
+
+#password-validation{
+    visibility: hidden;
 }

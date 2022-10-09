@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using zSolutions.Models.Jobs;
+using zSolutions.Models.Utils;
 
 namespace zSolutions.Models.Users
 {
@@ -12,7 +14,7 @@ namespace zSolutions.Models.Users
         public string Name { get; set; }
         [Required]
         [StringLength(50)]
-        public string Surename { get; set; }
+        public string Surname { get; set; }
         [Required]
         [StringLength(50)]
         public string Username { get; set; }
@@ -22,15 +24,12 @@ namespace zSolutions.Models.Users
         [Required]
         [StringLength(50)]
         public string Email { get; set; }
-        [Required]
-        public bool Invited { get; set; }
-        [NotMapped]
-        public bool IsEmailConfirmed { get; set; }
-        [Required]
-        public List<User>? Mentees { get; set; }
-        [NotMapped]
-        public User? Mentor { get; set; }
+        public bool? IsEmailConfirmed { get; set; }
         [StringLength(50)]
         public String? Company { get; set; }
+        [Required]
+        public UserType UserType { get; set; }
+        public int JobId { get; set; }
+        public List<Job>? Jobs { get; set; }
     }
 }

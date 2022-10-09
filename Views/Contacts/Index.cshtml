@@ -14,7 +14,7 @@
 @foreach (var item in Model)
 {
     <div class="card">
-        <h5 class="card-header"> @Html.DisplayFor(modelItem => item.Id) | @Html.DisplayFor(modelItem => item.Name)</h5>
+        <h5 class="card-header">@Html.DisplayFor(modelItem => item.Name)</h5>
         <div class="card-body">
             <h5 class="card-title">@Html.DisplayFor(modelItem => item.Email) | @Html.DisplayFor(modelItem => item.Phone)</h5>
             <p class="card-text">

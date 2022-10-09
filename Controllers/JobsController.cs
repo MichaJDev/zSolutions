@@ -17,12 +17,14 @@ namespace zSolutions.Controllers
         public JobsController(AppDbContext context)
         {
             _context = context;
+            
         }
 
         // GET: Jobs
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Jobs.ToListAsync());
+            ViewData["Users"] = _context.Users;
+            return View(await _context.Jobs.ToListAsync());
         }
 
         // GET: Jobs/Details/5
@@ -39,7 +41,7 @@ namespace zSolutions.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["Users"] = _context.Users;
             return View(job);
         }
 
@@ -54,7 +56,7 @@ namespace zSolutions.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,GitHub,Created,Status")] Job job)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,GitHub,Created,Status,ClientId")] Job job)
         {
             if (ModelState.IsValid)
             {
@@ -78,6 +80,7 @@ namespace zSolutions.Controllers
             {
                 return NotFound();
             }
+            ViewData["Users"] = new SelectList(_context.Users, "Id", "Name");
             return View(job);
         }
 
@@ -86,7 +89,7 @@ namespace zSolutions.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,GitHub,Created,Status")] Job job)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,GitHub,Created,Status,Client")] Job job)
         {
             if (id != job.Id)
             {
@@ -113,6 +116,7 @@ namespace zSolutions.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["Users"] = _context.Users;
             return View(job);
         }
 
@@ -148,14 +152,14 @@ namespace zSolutions.Controllers
             {
                 _context.Jobs.Remove(job);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool JobExists(int id)
-        {
-          return _context.Jobs.Any(e => e.Id == id);
+        private bool JobExists(int id) { 
+        
+            return _context.Jobs.Any(e => e.Id == id);
         }
     }
 }

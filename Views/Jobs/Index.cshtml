@@ -26,11 +26,10 @@
     <div class="card">
         <div class="container">
             <div class="row">
-                <div class="col-1">@Html.DisplayFor(modelItem => item.Id)</div>
-                <div class="col col-sm-7">@Html.DisplayFor(modelItem => item.Name)</div>
-                <div class="col-3">
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <div class="col card-style"><span class="align-items-baseline">@Html.DisplayFor(modelItem => item.Name)</span></div>
+                <div class="col-1 justify-content-end">
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><br />
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> <br />
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </div>
             </div>

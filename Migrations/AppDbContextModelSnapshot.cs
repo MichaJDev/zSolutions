@@ -64,6 +64,9 @@ namespace zSolutions.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
@@ -83,6 +86,8 @@ namespace zSolutions.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.ToTable("Jobs");
                 });
@@ -104,8 +109,11 @@ namespace zSolutions.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool>("Invited")
+                    b.Property<bool?>("IsEmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<int>("JobId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -117,12 +125,12 @@ namespace zSolutions.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Surename")
+                    b.Property<string>("Surname")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserType")
                         .HasColumnType("int");
 
                     b.Property<string>("Username")
@@ -132,21 +140,23 @@ namespace zSolutions.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("zSolutions.Models.Users.User", b =>
+            modelBuilder.Entity("zSolutions.Models.Jobs.Job", b =>
                 {
-                    b.HasOne("zSolutions.Models.Users.User", null)
-                        .WithMany("Mentees")
-                        .HasForeignKey("UserId");
+                    b.HasOne("zSolutions.Models.Users.User", "Client")
+                        .WithMany("Jobs")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("zSolutions.Models.Users.User", b =>
                 {
-                    b.Navigation("Mentees");
+                    b.Navigation("Jobs");
                 });
 #pragma warning restore 612, 618
         }

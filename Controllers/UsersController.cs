@@ -22,7 +22,7 @@ namespace zSolutions.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Users.ToListAsync());
+              return View(await _context.Users.Include(o => o.Jobs).ToListAsync());
         }
 
         // GET: Users/Details/5
@@ -54,7 +54,7 @@ namespace zSolutions.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Surename,Username,Password,Email,Invited,Company")] User user)
+        public async Task<IActionResult> Create([Bind("Id,Name,Surname,Username,Password,Email,Company,UserType,JobId")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace zSolutions.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Surename,Username,Password,Email,Invited,Company")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Surname,Username,Password,Email,Company,UserType,JobId")] User user)
         {
             if (id != user.Id)
             {
